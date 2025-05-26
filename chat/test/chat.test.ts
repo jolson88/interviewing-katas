@@ -20,6 +20,14 @@ describe('Chat', () => {
     ]);
   });
 
+  it('fails when user joins who is already a member', () => {
+    room.join('Alice');
+
+    expect(() => {
+      room.join('Alice');
+    }).toThrow('Alice is already a member of the room');
+  });
+
   it('multiple users can join chat', () => {
     room.join('Alice');
     room.join('Bob');
@@ -49,7 +57,7 @@ describe('Chat', () => {
     ]);
   })
 
-  it('throws an error when user tries to leave a room where they are not a member from', () => {
+  it('fails when user tries to leave a room where they are not a member from', () => {
     expect(() => {
       room.leave('Bob')
     }).toThrow('Bob is not a member of the room.');

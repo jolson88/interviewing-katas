@@ -16,10 +16,11 @@ export class Chat {
   }
 
   leave(name: string) {
-    if (!this._members.find(member => member.name === name)) {
+    const remainingMembers = this._members.filter(member => member.name !== name);
+    if (remainingMembers.length === this._members.length) {
       throw `${name} is not a member of the room.`
     }
 
-    this._members = this._members.filter(member => member.name !== name)
+    this._members = remainingMembers
   }
 }
