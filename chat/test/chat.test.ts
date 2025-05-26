@@ -8,59 +8,72 @@ describe('Chat', () => {
     room = new Chat();
   });
 
-  it('starts with no members', () => {
-    expect(room.members()).toEqual([]);
-  });
+  describe('membership', () => {
+    it('starts with no members', () => {
+      expect(room.members()).toEqual([]);
+    });
 
-  it('user can join chat', () => {
-    room.join('Alice');
-
-    expect(room.members()).toEqual([
-      { name: 'Alice' }
-    ]);
-  });
-
-  it('fails when user joins who is already a member', () => {
-    room.join('Alice');
-
-    expect(() => {
+    it('user can join chat', () => {
       room.join('Alice');
-    }).toThrow('Alice is already a member of the room');
+
+      expect(room.members()).toEqual([
+        { name: 'Alice' }
+      ]);
+    });
+
+    it('fails when user joins who is already a member', () => {
+      room.join('Alice');
+
+      expect(() => {
+        room.join('Alice');
+      }).toThrow('Alice is already a member of the room');
+    });
+
+    it('multiple users can join chat', () => {
+      room.join('Alice');
+      room.join('Bob');
+
+      expect(room.members()).toEqual([
+        { name: 'Alice' },
+        { name: 'Bob' }
+      ]);
+    });
+
+    it('user can leave chat', () => {
+      room.join('Alice');
+
+      room.leave('Alice');
+
+      expect(room.members()).toEqual([]);
+    })
+
+    it('user can leave chat from multiple-user room', () => {
+      room.join('Alice');
+      room.join('Bob');
+
+      room.leave('Bob');
+
+      expect(room.members()).toEqual([
+        { name: 'Alice' }
+      ]);
+    })
+
+    it('fails when user tries to leave a room where they are not a member from', () => {
+      expect(() => {
+        room.leave('Bob')
+      }).toThrow('Bob is not a member of the room.');
+    })
   });
 
-  it('multiple users can join chat', () => {
-    room.join('Alice');
-    room.join('Bob');
+  describe('messages', () => {
+    it('user can send message', () => {
+      room.join('Alice');
+      room.send({ from: 'Alice', message: 'Hello' });
 
-    expect(room.members()).toEqual([
-      { name: 'Alice' },
-      { name: 'Bob' }
-    ]);
-  });
-
-  it('user can leave chat', () => {
-    room.join('Alice');
-
-    room.leave('Alice');
-  
-    expect(room.members()).toEqual([]);
-  })
-
-  it('user can leave chat from multiple-user room', () => {
-    room.join('Alice');
-    room.join('Bob');
-
-    room.leave('Bob');
-  
-    expect(room.members()).toEqual([
-      { name: 'Alice' }
-    ]);
-  })
-
-  it('fails when user tries to leave a room where they are not a member from', () => {
-    expect(() => {
-      room.leave('Bob')
-    }).toThrow('Bob is not a member of the room.');
+      expect(room.history()).toEqual([
+        { from: 'Alice', message: 'Hello' },
+      ])
+    })
   })
 
   // user can send message
