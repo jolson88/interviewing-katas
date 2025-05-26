@@ -16,6 +16,10 @@ export class Chat {
   }
 
   leave(name: string) {
+    if (!this._members.find(member => member.name === name)) {
+      throw `${name} is not a member of the room.`
+    }
+
     this._members = this._members.filter(member => member.name !== name)
   }
 }

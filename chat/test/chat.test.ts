@@ -49,6 +49,12 @@ describe('Chat', () => {
     ]);
   })
 
+  it('throws an error when user tries to leave a room where they are not a member from', () => {
+    expect(() => {
+      room.leave('Bob')
+    }).toThrow('Bob is not a member of the room.');
+  })
+
   // user can send message
 
   // non-member unable to send message
