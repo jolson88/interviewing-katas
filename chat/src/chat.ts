@@ -10,6 +10,10 @@ export class Chat {
   }
 
   join(name: string) {
+    if (this._members.find(member => member.name === name)) {
+      throw `${name} is already a member of the room.`
+    }
+
     this._members.push({
       name
     });
