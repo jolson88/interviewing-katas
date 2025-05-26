@@ -1,4 +1,4 @@
-export class Chat {
+export class ChatRoom {
   private _members: Array<any>;
   private _history: Array<any>;
 
