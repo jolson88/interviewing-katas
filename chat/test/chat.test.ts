@@ -30,7 +30,24 @@ describe('Chat', () => {
     ]);
   });
 
-  // user can leave chat
+  it('user can leave chat', () => {
+    room.join('Alice');
+
+    room.leave('Alice');
+  
+    expect(room.members()).toEqual([]);
+  })
+
+  it('user can leave chat from multiple-user room', () => {
+    room.join('Alice');
+    room.join('Bob');
+
+    room.leave('Bob');
+  
+    expect(room.members()).toEqual([
+      { name: 'Alice' }
+    ]);
+  })
 
   // user can send message
 

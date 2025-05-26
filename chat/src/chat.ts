@@ -1,5 +1,5 @@
 export class Chat {
-  private readonly _members: Array<any>;
+  private _members: Array<any>;
 
   constructor() {
     this._members = [];
@@ -13,5 +13,9 @@ export class Chat {
     this._members.push({
       name
     });
+  }
+
+  leave(name: string) {
+    this._members = this._members.filter(member => member.name !== name)
   }
 }
