@@ -8,6 +8,8 @@ or complexity.
 
 ## Projects
 
+To create a new project/kata, you can copy the _template directory to a new directory and start from there.
+
 ### Chat Room
 
 A simple chat room experience. Users can join, leave, and send messages.
