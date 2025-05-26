@@ -12,7 +12,7 @@ export class Chat {
   }
 
   join(name: string) {
-    if (this._members.find(member => member.name === name)) {
+    if (this.#isMember(name)) {
       throw `${name} is already a member of the room.`
     }
 
@@ -22,19 +22,26 @@ export class Chat {
   }
 
   leave(name: string) {
-    const remainingMembers = this._members.filter(member => member.name !== name);
-    if (remainingMembers.length === this._members.length) {
+    if (!this.#isMember(name)) {
       throw `${name} is not a member of the room.`
     }
 
-    this._members = remainingMembers
+    this._members = this._members.filter(member => member.name !== name);
   }
 
-  send(message: object) {
+  send(message: any) {
+    if (!this.#isMember(message.from)) {
+      throw `${message.from} is not a member`
+    }
+
     this._history.push(message)
   }
 
   history() {
     return this._history
+  }
+
+  #isMember(name: string): boolean {
+    return this._members.find(member => member.name === name)
   }
 }
