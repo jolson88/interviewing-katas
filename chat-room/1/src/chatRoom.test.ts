@@ -73,4 +73,34 @@ describe('ChatRoom', () => {
       expect(room.history()).toEqual([]);
     });
   });
+
+  describe('history', () => {
+    it('does not change when user leaves', () => {
+      room.join('first_user');
+      room.join('second_user');
+      room.send({ from: 'first_user', message: 'first message' });
+      room.send({ from: 'second_user', message: 'second message' });
+
+      room.leave('first_user');
+
+      expect(room.history()).toEqual([
+        { from: 'first_user', message: 'first message' },
+        { from: 'second_user', message: 'second message' }
+      ]);
+    });
+
+    it.todo('keeps only the configured number of messages', () => {
+      // const room = new ChatRoom({ history: 2 });
+      // room.join('user');
+      //
+      // room.send({ from: 'user', message: 'one' });
+      // room.send({ from: 'user', message: 'two' });
+      // room.send({ from: 'user', message: 'three' });
+      //
+      // expect(room.history()).toEqual([
+      //   { from: 'user', message: 'two' },
+      //   { from: 'user', message: 'three' }
+      // ]);
+    });
+  });
 });

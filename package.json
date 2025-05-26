@@ -4,7 +4,7 @@
   "description": "A monorepo for a collection of pair-programming interview projects",
   "main": "index.js",
   "scripts": {
-    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "lint-staged": "npx lint-staged",
     "prepare": "husky install"
   },
   "lint-staged": {
