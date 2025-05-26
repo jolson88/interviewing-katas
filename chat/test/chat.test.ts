@@ -12,7 +12,13 @@ describe('Chat', () => {
     expect(room.members()).toEqual([]);
   });
 
-  // user can join chat
+  it('user can join chat', () => {
+    room.join('Alice');
+
+    expect(room.members()).toEqual([
+      { name: 'Alice' }
+    ]);
+  });
 
   // user can leave chat
 
