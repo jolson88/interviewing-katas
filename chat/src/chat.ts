@@ -1,8 +1,10 @@
 export class Chat {
   private _members: Array<any>;
+  private _history: Array<any>;
 
   constructor() {
     this._members = [];
+    this._history = [];
   }
 
   members(): Array<any> {
@@ -26,5 +28,13 @@ export class Chat {
     }
 
     this._members = remainingMembers
+  }
+
+  send(message: object) {
+    this._history.push(message)
+  }
+
+  history() {
+    return this._history
   }
 }
