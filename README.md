@@ -15,4 +15,3 @@ Some example scenarios of features to be implemented:
 - Fails when non-member tries to send a message
 - History is capped at maximum length
 - History is unchanged when user leaves
-

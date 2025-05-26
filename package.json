@@ -1,0 +1,40 @@
+{
+  "name": "interviewing-katas",
+  "version": "1.0.0",
+  "description": "A monorepo for a collection of pair-programming interview projects",
+  "main": "index.js",
+  "scripts": {
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*.{js, jsx,ts,tsx}": [
+      "eslint --quiet --fix"
+    ],
+    "**/*.{json,js,ts,jsx,tsx,html}": [
+      "prettier --write --ignore-unknown"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jolson88/interviewing-katas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/jolson88/interviewing-katas/issues"
+  },
+  "homepage": "https://github.com/jolson88/interviewing-katas#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.27.0",
+    "eslint": "^9.27.0",
+    "eslint-config-prettier": "^10.1.5",
+    "globals": "^16.2.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^16.0.0",
+    "prettier": "^3.5.3",
+    "typescript-eslint": "^8.32.1"
+  }
+}
