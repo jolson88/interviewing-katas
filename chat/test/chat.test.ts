@@ -74,6 +74,13 @@ describe('Chat', () => {
         { from: 'Alice', message: 'Hello' },
       ])
     })
+
+    it('fails when non-member sends a message', () => {
+      expect(() => {
+        room.send({ from: 'non_member', message: 'irrelevant_message' })
+      }).toThrow('non_member is not a member');
+      expect(room.history()).toEqual([]);
+    });
   })
 
   // user can send message
